@@ -1,18 +1,17 @@
-# This is a sample Python script.
-
-# Press Umschalt+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from PIL import Image, ImageDraw, ImageFont
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Strg+F8 to toggle the breakpoint.
+def save_compressed(img):
+    img.save("./imgs/test1.jpg", "JPEG",  optimize=True, qualitiy = 1)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    x = 1
-    print(x)
-    print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+def watermark(img):
+    watermarked = ImageDraw(img)
+    watermarked.text((5, 2), "Can")
+    watermarked.bitmap((12, 9), Image.open("./imgs/test.png").resize((50, 50)))
+
+if __name__ == "__main__":
+    img = Image.open("./imgs/test.jpg")
+    save_compressed(img)
+    img.show()
